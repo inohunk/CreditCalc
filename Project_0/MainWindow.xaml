@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="433.193">
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="436.504" Width="433.193">
     <Grid>
         <TextBox x:Name="loanPrecentField" VerticalContentAlignment="Center" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="30" Margin="10,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" FontSize="14"/>
         <Label Content="Исходные данные" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox x:Name="loanPeriodField" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="10,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" FontSize="14"/>
-        <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="10,317,0,0" TextWrapping="Wrap" Text="Фиксированный размер" VerticalAlignment="Top" Width="139" />
-        <TextBox VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="10,345,0,0" TextWrapping="Wrap" Text="Размера кредита %" VerticalAlignment="Top" Width="139"/>
+        <TextBox x:Name="clientPayField" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="10,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139" />
+        <TextBox x:Name="clientPayPrecentField" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="31" Margin="10,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="loanSizeField" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="10,60,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="139"  FontSize="14"/>
-        <Label Content="Размер кредита" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <Label Content="Проценты по кредиту" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" Height="22" Width="123" FontSize="10"/>
-        <Label Content="Срок кредита" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" FontSize="10"/>
-        <TextBox x:Name="outputBox" HorizontalAlignment="Left" Height="224" Margin="163,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="252"/>
-        <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Width="139" Click="Button_Click_1" Height="36"/>
+        <Label Content="Размер кредита (рубли)" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label Content="Проценты по кредиту" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Height="27" Width="159" FontSize="14"/>
+        <Label Content="Срок кредита(месяцы)" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <TextBox x:Name="outputBox" HorizontalAlignment="Left" Margin="169,10,0,11" TextWrapping="Wrap" Width="248"/>
+        <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,361,0,11" Width="139" Click="Button_Click_1" FontSize="18"/>
+        <Label Content="Стоимость оформления &#xA;кредита(рубли)" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" FontSize="14" Height="50" Width="191"/>
+        <Label Content="От размера кредита(%)" HorizontalAlignment="Left" Margin="10,285,0,0" VerticalAlignment="Top" FontSize="14" Height="33"/>
 
     </Grid>
 </Window>

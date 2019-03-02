@@ -23,7 +23,8 @@ namespace Project_0
         double loanSum;
         double loanPrecent;
         double loanPeriod;
-        
+        double clientPay;
+        double clientPayPrecent;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,25 +32,38 @@ namespace Project_0
 
         private void dataOutput(object data)
         {
-            outputBox.Text += data.ToString()+"\n";
+            outputBox.Text += data.ToString() + "\n";
+        }
+        private void clearOutput()
+        {
+            outputBox.Text = null;
         }
         private void initVariables()
         {
-            
-            loanSum = double.Parse(loanSizeField.Text);
-            loanPrecent = double.Parse(loanPrecentField.Text);
-            loanPeriod = double.Parse(loanPeriodField.Text);
+            try
+            {
+                loanSum = double.Parse(loanSizeField.Text);
+                loanPrecent = double.Parse(loanPrecentField.Text);
+                loanPeriod = double.Parse(loanPeriodField.Text);
+                clientPay = double.Parse(clientPayField.Text);
+                clientPayPrecent = double.Parse(clientPayPrecentField.Text);
+            }
+            catch (Exception e)
+            {
+
+
+                ////throw new FormatException();
+            }
         }
         private double getDiffPay()
         {
             double startPay = loanSum / loanPeriod;
-
             double monthDiff = getMonthPay() - startPay;
-            MessageBox.Show(getMonthPay().ToString());
-            MessageBox.Show(startPay.ToString());
-            MessageBox.Show(monthDiff.ToString());
-
             return monthDiff * loanPeriod;
+        }
+        private double getClientPay()
+        {
+            return clientPay + ((clientPayPrecent / 100) * loanSum);
         }
         private bool allCorrect()
         {
@@ -60,7 +74,10 @@ namespace Project_0
                 {
                     if (loanPeriod >= 6 && loanPeriod <=72)
                     {
-                        correct = true;
+                        if(clientPay >=0 && clientPayPrecent >=0)
+                        {
+                            correct = true;
+                        }
                     }
                 }
             }
@@ -68,45 +85,32 @@ namespace Project_0
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+           
             initVariables();
-            
-            dataOutput("Размер кредита: " + loanSum);
-            dataOutput("Срок кредита: " + loanPeriod);
-            dataOutput("Процентная ставка: " + loanPrecent);
-            dataOutput("------------------------");
-            dataOutput("Размер ежемесячной выплаты: " + (int)getMonthPay()+"р");
-            dataOutput("Переплата: " + (int)getDiffPay());
-
-
-            //outputBox.Text = getMonth(double.Parse(loanSize.Text), double.Parse(loanPeriod.Text), int.Parse(loanPrecent.Text)).ToString();
-            //outputBox.Text = getMonthPay().ToString();
+            if (allCorrect())
+            {
+                clearOutput();
+                dataOutput("Размер кредита: " + loanSum +"р");
+                dataOutput("Срок кредита: " + loanPeriod+" мес");
+                dataOutput("Процентная ставка: " + loanPrecent+"%");
+                dataOutput("------------------------");
+                dataOutput("Размер ежемесячной выплаты: " + (int)getMonthPay() + "р");
+                dataOutput("Переплата: " + (int)getDiffPay()+"р");
+                dataOutput("Плата за оформление: " + getClientPay() + "р");
+                dataOutput("Сумма переплат: " + (int)(getDiffPay() + getClientPay()) + "р");
+                dataOutput("Общая сумма: " + (int)(getDiffPay() + getClientPay() + loanSum) + "р");
+            }
+            else
+            {
+                MessageBox.Show("Проверьте правильность данных!");
+            }
         }
         double getMonthPay()
-        {
-            
+        {   
             double p = loanPrecent / 12 / 100;
             double k = (p * Math.Pow((1 + p), loanPeriod) / (Math.Pow(1 + p, loanPeriod) - 1));
-            //double m = (n * p * Math.Pow(1 + p, y)) / (12 * (Math.Pow(1 + p, y) - 1));
             double m = k * loanSum;
             return m;
         }
-        decimal getMonth(double S, double P, int N)
-        {
-            
-            double x;
-            x = S * (P+((P)
-                /
-                (Math.Pow(1+P,N)-1)));
-            return Convert.ToDecimal(((S * P * Math.Pow(1 + P, N))/(12 * (Math.Pow(1 + P, N) - 1))));
-        }
-        double getMonthPrice(double sum, double year, double precent)
-        {
-            return (
-                (sum * precent * Math.Pow(1 + precent, year))
-                /
-                12 * (Math.Pow(1 + precent, year) - 1)
-                );
-        }
-
     }
 }
