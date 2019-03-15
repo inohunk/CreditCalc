@@ -13,18 +13,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Project_0
 {
+
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Error messages
+        
+        const string INCORRECT_LOAN_SUM = "Неправильно введенна сумма. \n Сумма должна быть в диапазоне от 10000 до 1000000";
+        const string INCORRECT_LOAN_PRECENT = "Неправильно введен процент по кредиту. \n Процент должен быть в диапазоне от 9.5 до 23";
+        const string INCORRECT_LOAN_PERIOD = "Неправильно введен срок предоставления кредита. \n Срок может быть от 6 до 72 месяцев";
+        const string INCORRECT_LOAN_CLIENT_PAY = "Неправильно введены выплаты клиента по оформлению документов. \n Эти числа не могут быть отрицательными";
+        
+
+        
+
+        //Variables
         double loanSum;
         double loanPrecent;
         double loanPeriod;
         double clientPay;
         double clientPayPrecent;
+
+        
+
+        //Functions
         public MainWindow()
         {
             InitializeComponent();
@@ -70,17 +87,22 @@ namespace Project_0
             bool correct = false;
             if(loanSum >=10000 && loanSum <= 1000000)
             {
+           
                 if(loanPrecent>=9.5d && loanPrecent <= 23d)
                 {
                     if (loanPeriod >= 6 && loanPeriod <=72)
                     {
-                        if(clientPay >=0 && clientPayPrecent >=0)
+                        if (clientPay >= 0 && clientPayPrecent >= 0)
                         {
                             correct = true;
                         }
+                        else MessageBox.Show(INCORRECT_LOAN_CLIENT_PAY);
                     }
+                    else MessageBox.Show(INCORRECT_LOAN_PERIOD);
                 }
+                else MessageBox.Show(INCORRECT_LOAN_PRECENT);
             }
+            else MessageBox.Show(INCORRECT_LOAN_SUM);
             return correct;
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -93,16 +115,20 @@ namespace Project_0
                 dataOutput("Размер кредита: " + loanSum +"р");
                 dataOutput("Срок кредита: " + loanPeriod+" мес");
                 dataOutput("Процентная ставка: " + loanPrecent+"%");
-                dataOutput("------------------------");
+                dataOutput("======================");
                 dataOutput("Размер ежемесячной выплаты: " + (int)getMonthPay() + "р");
+                dataOutput("--------------------------");
                 dataOutput("Переплата: " + (int)getDiffPay()+"р");
+                dataOutput("--------------------------");
                 dataOutput("Плата за оформление: " + getClientPay() + "р");
+                dataOutput("--------------------------");
                 dataOutput("Сумма переплат: " + (int)(getDiffPay() + getClientPay()) + "р");
+                dataOutput("--------------------------");
                 dataOutput("Общая сумма: " + (int)(getDiffPay() + getClientPay() + loanSum) + "р");
             }
             else
             {
-                MessageBox.Show("Проверьте правильность данных!");
+                //MessageBox.Show("Проверьте правильность данных!");
             }
         }
         double getMonthPay()
